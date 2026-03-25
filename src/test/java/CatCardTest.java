@@ -22,8 +22,8 @@ public class CatCardTest {
      */
 
     @Test
-    @DisplayName("Проверка статус кода ответа")
-    public void CatCardStatusCodTest(){
+    @DisplayName("Проверка статус кода ответа 200")
+    public void CatCardStatusCod200Test(){
         given()
                 .when()
                 .get(endpointv1 + "1")
@@ -33,8 +33,8 @@ public class CatCardTest {
 
 
     @Test
-    @DisplayName("Проверка формата ответа")
-    public void CatCardFormatTest(){
+    @DisplayName("Проверка формата ответа - JSON")
+    public void CatCardFormatJSONTest(){
         given()
                 .when()
                 .get(endpointv1 + "1")
@@ -45,8 +45,8 @@ public class CatCardTest {
     }
 
     @Test
-    @DisplayName("Проверка формата ответа")
-    public void CatCardFormat2Test(){
+    @DisplayName("Проверка содержимого ответа")
+    public void CatCardFormatContentTest(){
         given()
                 .when()
                 .get(endpointv1 + "1")
@@ -67,6 +67,8 @@ public class CatCardTest {
                 .body("createdAt",notNullValue())
                 .body("updatedAt",notNullValue());
     }
+
+
     @Test
     @DisplayName("Проверка несуществующего id")
     public void CatCardNotIdTest(){
@@ -80,7 +82,7 @@ public class CatCardTest {
     }
 
     @Test
-    @DisplayName("Проверка несуществующего id")
+    @DisplayName("Проверка не правильного формата id")
     public void CatCardStringIdTest(){
         given()
                 .when()
@@ -92,7 +94,8 @@ public class CatCardTest {
     }
 
     @Test
-    @DisplayName("Проверка несуществующего id")
+    //TODO Требуется завести баг
+    @DisplayName("Проверка отрицательного id")
     public void CatCardNegativeIdTest(){
         given()
                 .when()
