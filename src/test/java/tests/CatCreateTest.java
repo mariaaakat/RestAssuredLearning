@@ -1,3 +1,5 @@
+package tests;
+
 import io.restassured.response.Response;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
