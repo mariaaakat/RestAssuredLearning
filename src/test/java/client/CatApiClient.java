@@ -20,4 +20,13 @@ public class CatApiClient {
                .then()
                .extract().response();
    }
+    public Response getCatById(Integer id) {
+        return given()
+                .spec(BaseCatSpec.baseCatSpec())//вызов baseSpec позволяет применять общие настройки к запросу
+                .pathParam("id", id)
+                .when()
+                .get(Endpoints.CAT_BY_ID)
+                .then()
+                .extract().response();
+    }
 }
