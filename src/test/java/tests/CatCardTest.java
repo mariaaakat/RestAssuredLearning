@@ -9,7 +9,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class CatCardTest {
-    public static final org.hamcrest.Matcher<Object> MATCHER = notNullValue();
     public static String endpoint = "http://localhost:8081/api/cats/";
     public static String endpointv1 = "http://localhost:8081/api/v1/cats/";
     /**
@@ -53,7 +52,7 @@ public class CatCardTest {
                 .when()
                 .get(endpointv1 + "1")
                 .then()
-                //.log().body()
+                .log().body()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("id", equalTo(1))
@@ -84,7 +83,7 @@ public class CatCardTest {
     }
 
     @Test
-    @DisplayName("Проверка не правильного формата id")
+    @DisplayName("Проверка не правильного формата id - string")
     public void CatCardStringIdTest(){
         given()
                 .when()
