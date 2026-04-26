@@ -18,4 +18,31 @@ public class CatGenerator {
         body.put("ownerEmail", randomCat.toLowerCase() + "@mail.ru");
         return body;
     }
+    /**
+     * Генерирует тело запроса для создания кота с переданными параметрами.
+     * Позволяет гибко задавать значения для тестов.
+     */
+    public static Map<String, Object> generateBaseCat(
+            String name,
+            int age,
+            String color,
+            String breed,
+            double weight,
+            boolean vaccinated,
+            String birthDate,
+            String ownerEmail
+    ) {
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("name", name);
+        body.put("age", age);
+        body.put("color", color);
+        body.put("breed", breed);
+        body.put("weight", weight);
+        body.put("vaccinated", vaccinated);
+        body.put("birthDate", birthDate);
+        body.put("ownerEmail", ownerEmail);
+
+        return body;
+    }
 }

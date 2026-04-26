@@ -29,4 +29,14 @@ public class CatApiClient {
                 .then()
                 .extract().response();
     }
+
+    public Response deleteCatByID(Integer id){
+       return given()
+               .spec(BaseCatSpec.baseCatSpec())
+               .pathParam("id", id)
+               .when()
+               .delete(Endpoints.CAT_BY_ID)
+               .then()
+               .extract().response();
+    }
 }
