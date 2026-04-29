@@ -42,20 +42,20 @@ public class CatDeleteTest {
   @ValueSource(ints = {-2, 0, 1000})
   public void deleteCatNotValidIdTest(int id) {
     CatApiClient client = new CatApiClient();
-   // Response createCatResponse = client.createCat(CatGenerator.generateBaseCat("Tom", 5, "red", "street", 5.5, true, "10.11.2020", "tom@mail.ru"));
     Response deleteResponse = client.deleteCatByID(id);
     assertEquals(404, deleteResponse.statusCode());
   }
 
-  @DisplayName("Удаление кота с невалидными значениями с пустой, null и String значением")
-  @ParameterizedTest
-  @NullSource
-  @EmptySource
+  @DisplayName("Удаление кота с невалидными значениями с пустой, null ")
+ // @ParameterizedTest
+//  @EmptySource // используется для объектов которые могут содержать стринг или самих стрингов
+ // @NullSource // используется для объектов которые могут содержать стринг или самих стрингов и для других ссылочных типов данных
   public void deleteCatNotIntIdTest(Integer id){
     CatApiClient client = new CatApiClient();
     // Response createCatResponse = client.createCat(CatGenerator.generateBaseCat("Tom", 5, "red", "street", 5.5, true, "10.11.2020", "tom@mail.ru"));
     Response deleteResponse = client.deleteCatByID(id);
     assertEquals(404, deleteResponse.statusCode());
   }
+
 
 }
