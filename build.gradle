@@ -18,7 +18,10 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured:6.0.0")
     //библиотека джексон нужна для сериализации данных (пример перевод маппы в джейсон)
     testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
-
+    compileOnly("org.projectlombok:lombok:1.18.46")
+    annotationProcessor("org.projectlombok:lombok:1.18.46")
+    testCompileOnly("org.projectlombok:lombok:1.18.46")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.46")
 }
 
 test {
