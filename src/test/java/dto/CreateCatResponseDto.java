@@ -8,15 +8,16 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class CreateCatResponseDto {
-    private int id;
+    private Integer id;
     private String name;
-    private int age;
+    private Integer age;
     private String color;
     private String breed;
-    private double weight;
-    private boolean vaccinated;
+    private Double weight;
+    private Boolean vaccinated;
     private String birthDate;
     private String ownerEmail;
+    private String status;
     private String createdAt;
     private String updatedAt;
 }

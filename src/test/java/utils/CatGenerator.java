@@ -1,8 +1,12 @@
 package utils;
 
+import dto.CreateCatRequestDto;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import static constants.DefaultCateData.*;
 
 public class CatGenerator {
     public static Map<String, Object> catGenerator(){
@@ -44,5 +48,18 @@ public class CatGenerator {
         body.put("ownerEmail", ownerEmail);
 
         return body;
+    }
+
+    public static CreateCatRequestDto createDefaultCat (){
+        return CreateCatRequestDto.builder()
+                .name(DEFAULT_NAME)
+                .age(DEFAULT_AGE)
+                .color(DEFAULT_COLOR)
+                .breed(DEFAULT_BREED)
+                .weight(DEFAULT_WEIGHT)
+                .vaccinated(DEFAULT_VACCINATED)
+                .birthDate(DEFAULT_BIRTH_DATE)
+                .ownerEmail(DEFAULT_OWNER_EMAIL)
+                .build();
     }
 }

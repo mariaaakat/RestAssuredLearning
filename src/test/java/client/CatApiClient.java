@@ -7,6 +7,7 @@ import dto.CreateCatResponseDto;
 import dto.DeleteCatRequestDto;
 import dto.UpdateCatRequestDTO;
 import io.restassured.response.Response;
+import utils.CatGenerator;
 
 import java.util.Map;
 
@@ -55,10 +56,11 @@ public class CatApiClient {
                 .as(CreateCatResponseDto.class);
     }
 
-    public UpdateCatRequestDTO updateCat(UpdateCatRequestDTO body){
+    public UpdateCatRequestDTO updateCat(UpdateCatRequestDTO body, int id){
        return given()
                .spec(BaseCatSpec.baseCatSpec())
                .body(body)
+               .pathParam("id", id)
                .when()
                .put(Endpoints.CAT_BY_ID)
                .then()
@@ -85,5 +87,17 @@ public class CatApiClient {
                .then()
                .extract()
                .as(CreateCatResponseDto.class);
+    }
+
+    public Response updateCatPath(UpdateCatRequestDTO body, int id){
+       return given()
+               .spec(BaseCatSpec.baseCatSpec())
+               .pathParam("id", id)
+                .body(body)
+                .when()
+                .patch(Endpoints.CAT_BY_ID)
+                .then()
+                .extract()
+                .response();
     }
 }
