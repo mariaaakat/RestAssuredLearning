@@ -27,7 +27,9 @@ public class UpdateCatTest {
 
     @AfterEach
     public void deleteCat(){
-        client.deleteCatByID(id);
+        client.deleteCatByID(id).then()
+                .statusCode(204);
+
     }
 
     @DisplayName("Обновление имени кота")
@@ -37,9 +39,10 @@ public class UpdateCatTest {
         UpdateCatRequestDTO updateNameDto = UpdateCatRequestDTO.builder().name("Tom").build();
         Response updateResponse = client.updateCatPath(updateNameDto, id);
         String after = client.getCatById(id).jsonPath().getString("name");
+        assertEquals(200, updateResponse.statusCode());
         assertNotEquals(before, after);
         assertEquals("Tom", after);
-        assertEquals(200, updateResponse.statusCode());
+
     }
     /**
      * 1.Обновление имени кота
@@ -53,7 +56,7 @@ public class UpdateCatTest {
      * 9.Обновление всех полей у кота
      * 10.Обновление имени кота негативное , проверка пустого значения
      * 11.Обновление имени кота негативное null
-     * 11.Обновление имени кота много символовмв имени
+     * 11.Обновление имени кота много символов имени
      * 12.Обновление невалидного возраста кота
      */
 
@@ -65,9 +68,10 @@ public class UpdateCatTest {
         UpdateCatRequestDTO updateAgeDto = UpdateCatRequestDTO.builder().age(5).build();
         Response updateResponse = client.updateCatPath(updateAgeDto, id);
         int after = client.getCatById(id).jsonPath().getInt("age");
+        assertEquals(200, updateResponse.statusCode());
         assertNotEquals(before, after);
         assertEquals(5, after);
-        assertEquals(200, updateResponse.statusCode());
+
     }
 
     @DisplayName("Обновление цвета кота")
@@ -78,9 +82,9 @@ public class UpdateCatTest {
         UpdateCatRequestDTO updateColorDto = UpdateCatRequestDTO.builder().color("RED").build();
         Response updateResponse = client.updateCatPath(updateColorDto, id);
         String after = client.getCatById(id).jsonPath().getString("color");
+        assertEquals(200, updateResponse.statusCode());
         assertNotEquals(before, after);
         assertEquals("RED", after);
-        assertEquals(200, updateResponse.statusCode());
     }
 
     @DisplayName("Обновление породы кота")
@@ -126,9 +130,10 @@ public class UpdateCatTest {
         UpdateCatRequestDTO updateBirthDateDto = UpdateCatRequestDTO.builder().birthDate("2020-05-30").build();
         Response updateResponse = client.updateCatPath(updateBirthDateDto, id);
         String after = client.getCatById(id).jsonPath().getString("birthDate");
+        assertEquals(200, updateResponse.statusCode());
         assertNotEquals(before, after);
         assertEquals("2020-05-30", after);
-        assertEquals(200, updateResponse.statusCode());
+
     }
 
     @DisplayName("Обновление почты владельца кота")
@@ -138,9 +143,10 @@ public class UpdateCatTest {
         UpdateCatRequestDTO updateOwnerEmaileDto = UpdateCatRequestDTO.builder().ownerEmail("cat@mail.ru").build();
         Response updateResponse = client.updateCatPath(updateOwnerEmaileDto, id);
         String after = client.getCatById(id).jsonPath().getString("ownerEmail");
+        assertEquals(200, updateResponse.statusCode());
         assertNotEquals(before, after);
         assertEquals("cat@mail.ru", after);
-        assertEquals(200, updateResponse.statusCode());
+
     }
 
     @DisplayName("Обновление всех полей кота")
@@ -159,9 +165,9 @@ public class UpdateCatTest {
              .build();
         Response updateResponse = client.updateCatPath(allCatDto, id);
         String afterN = client.getCatById(id).jsonPath().getString("name");
+        assertEquals(200, updateResponse.statusCode(), "Ответ должен иметь статус 200");
         assertNotEquals(beforeN, afterN);
         assertEquals("Bim", afterN);
-        assertEquals(200, updateResponse.statusCode(), "Ответ должен иметь статус 200");
 
     }
 
@@ -169,20 +175,16 @@ public class UpdateCatTest {
     @DisplayName("Обновление имени кота пустое значение")
     @Test
     public void updateCatEmptyNameTest(){
-        String before = client.getCatById(id).jsonPath().getString("name");
         UpdateCatRequestDTO updateNameDto = UpdateCatRequestDTO.builder().name("").build();
         Response updateResponse = client.updateCatPath(updateNameDto, id);
-        String after = client.getCatById(id).jsonPath().getString("name");
         assertEquals(400, updateResponse.statusCode());
     }
     @DisplayName("Обновление имени кота null значение")
     // TODO завести баг, поле не должно принимать null
     @Test
     public void updateCatNullNameTest(){
-        String before = client.getCatById(id).jsonPath().getString("name");
         UpdateCatRequestDTO updateNameDto = UpdateCatRequestDTO.builder().name(null).build();
         Response updateResponse = client.updateCatPath(updateNameDto, id);
-        String after = client.getCatById(id).jsonPath().getString("name");
         assertEquals(400, updateResponse.statusCode());
     }
 
@@ -196,7 +198,6 @@ public class UpdateCatTest {
     @DisplayName("Обновление  полей типа строка c пустым значением")
     @Test
     public void updateStringCatEmptyTest(){
-        String beforeN = client.getCatById(id).jsonPath().getString("name");
         UpdateCatRequestDTO allCatDto = UpdateCatRequestDTO.builder()
                 .name("")
                 .color("")
